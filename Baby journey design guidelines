@@ -1,0 +1,290 @@
+# Little Sprout — Design Guidelines
+
+A design system for a baby-journey logging web app. Built for tired parents who want to capture fleeting moments without friction, track growth and health with confidence, and feel a little pocket of calm every time they open the app.
+
+Use this document as context when asking Claude to design any screen, component, or flow.
+
+---
+
+## 1. Design Philosophy
+
+**Grounded, not saccharine.** Most baby apps lean pastel-bubblegum-pink or cartoon-primary. We go the other way: earthy, herbal, botanical. Think linen nursery, not plastic playroom. Think _Muji_ meets _Headspace_ meets a high-end pediatric clinic.
+
+**Three non-negotiable principles**
+
+1. **One-handed, low-effort.** Parents log while holding a baby. Every primary action is reachable with a thumb, within two taps, and forgiving of miss-taps.
+2. **Calm first, cute second.** The baseline is serene and uncluttered. Cuteness appears as rewards — a sprout animation on a completed day, a friendly illustration in an empty state — never as ambient noise.
+3. **Trust for health data.** Allergies, medications, and feedings are health records. Their UI is clear, scannable, and medically credible. No emoji-only labels for critical info.
+
+**Aesthetic direction: "Botanical Journal"**
+A pediatrician's notebook styled like a botanical field guide. Sage and linen. Soft hand-drawn leaves. Serif headlines with rounded sans-serif body. Gentle grain texture on surfaces. Subtle.
+
+---
+
+## 2. Color System
+
+The anchor is **Moody Forest** — a muted olive-sage. All other colors are tuned to sit in harmony with it (same desaturation level, warm undertones).
+
+### Core palette
+
+| Token | Hex | Role |
+|---|---|---|
+| `--sage-900` | `#3E4A2E` | Headlines on light, icon-active |
+| `--sage-700` | `#6B7A4F` | Primary text, buttons |
+| `--sage-500` | `#9CA57A` | **Moody Forest — brand anchor** |
+| `--sage-300` | `#C5CBA8` | Hover states, dividers |
+| `--sage-100` | `#E8EBD6` | Selected chips, soft backgrounds |
+| `--sage-50`  | `#F4F5E9` | Subtle fills |
+
+### Neutrals (warm, never cool)
+
+| Token | Hex | Role |
+|---|---|---|
+| `--linen-50`  | `#FAF7F1` | **App background** |
+| `--linen-100` | `#F2ECE0` | Card surface |
+| `--linen-200` | `#E6DDCB` | Card border, inputs |
+| `--ink-900`   | `#2A2823` | Body text on light |
+| `--ink-600`   | `#6B665C` | Secondary text |
+| `--ink-400`   | `#A8A193` | Tertiary text, placeholders |
+
+### Accents (used sparingly — one per screen, max)
+
+| Token | Hex | Role |
+|---|---|---|
+| `--peach` | `#E8B59C` | Milestones, celebrations |
+| `--butter` | `#E8D191` | Sleep, night-mode highlights |
+| `--clay` | `#C08775` | Allergy alerts, warnings |
+| `--dusk` | `#8FA3B8` | Health/medical data tags |
+
+### Semantic
+
+| Token | Hex | Role |
+|---|---|---|
+| `--success` | `#7A9459` | deeper sage, not kelly green |
+| `--warning` | `#D4A574` | warm ochre, not yellow |
+| `--danger` | `#B85C4C` | terracotta, not crimson |
+| `--info` | `#7A91A8` | dusk blue |
+
+### Rules
+- **70 / 25 / 5**: 70% linen neutrals, 25% sage family, 5% accent.
+- Never place sage-500 on linen-50 for text — contrast fails. Text uses sage-700 or sage-900.
+- Accent colors never fill large areas. They are for icons, tags, small dots, and celebration moments.
+- A dark mode should exist: invert to `--ink-900` backgrounds with sage-300 text; retain warm undertones (no pure black, no cool grey).
+
+---
+
+## 3. Typography
+
+Avoid the usual suspects (Inter, Roboto, system stacks). We want warmth and editorial confidence.
+
+### Fonts
+
+- **Display / headings**: **Fraunces** — variable serif, set with `opsz` high and slight softness. Alternatives: _Young Serif_, _Recoleta_.
+- **Body / UI**: **Nunito** — rounded, friendly, highly readable for tired eyes. Alternatives: _DM Sans_, _Plus Jakarta Sans_.
+- **Numerics (weights, times, measurements)**: **Fraunces** at tabular figure setting, or body font with `font-variant-numeric: tabular-nums`. Numbers should feel like hand-written journal entries, not spreadsheet cells.
+
+### Scale (mobile-first, px)
+
+| Token | Size / Line | Weight | Use |
+|---|---|---|---|
+| `display` | 40 / 48 | Fraunces 400 | Hero screens, celebrations |
+| `h1` | 28 / 36 | Fraunces 500 | Page titles |
+| `h2` | 22 / 30 | Fraunces 500 | Section titles |
+| `h3` | 18 / 26 | Nunito 700 | Card titles |
+| `body-lg` | 17 / 26 | Nunito 400 | Primary reading |
+| `body` | 15 / 22 | Nunito 400 | Default UI |
+| `caption` | 13 / 18 | Nunito 600 | Labels, metadata |
+| `micro` | 11 / 14 | Nunito 700, tracked +40 | Uppercase tags |
+
+### Rules
+- Headlines in Fraunces get **-1% letter-spacing**, optical size 48+.
+- Body text never goes below 15px on mobile.
+- Numerics are always tabular in tables, logs, and stat cards.
+- Never bold body text for emphasis — use Fraunces italic or a sage-100 highlight instead.
+
+---
+
+## 4. Spacing, Radii, Elevation
+
+### Spacing (8-point, with 4 allowed for tight clusters)
+`4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96`
+
+- Screen horizontal padding: 20 mobile, 32 tablet, 64 desktop.
+- Card internal padding: 20.
+- Vertical rhythm between sections: 32 mobile, 48 desktop.
+
+### Radii
+- `--r-sm`: 8 (chips, tags)
+- `--r-md`: 14 (inputs, small buttons)
+- `--r-lg`: 20 (cards, modals)
+- `--r-xl`: 28 (hero surfaces, bottom sheets)
+- `--r-pill`: 999 (avatars, primary CTAs)
+
+Never use perfectly square corners. Never use radii above 32 except for circular elements.
+
+### Elevation (soft, warm shadows — never grey)
+
+```css
+--shadow-sm:  0 1px 2px rgba(80, 70, 50, 0.06);
+--shadow-md:  0 4px 12px rgba(80, 70, 50, 0.08);
+--shadow-lg:  0 12px 32px rgba(80, 70, 50, 0.10);
+--shadow-focus: 0 0 0 3px rgba(156, 165, 122, 0.35); /* sage glow */
+```
+
+Elevation is used _sparingly_. Most cards are defined by a 1px `--linen-200` border, not a shadow. Shadows appear on floating elements only (FAB, modals, toasts, active popovers).
+
+### Texture
+A nearly-invisible paper grain on `--linen-50` background (SVG noise at 3% opacity) gives the whole app a tactile, journal-like quality. This is optional but elevates the aesthetic significantly.
+
+---
+
+## 5. Iconography & Illustration
+
+### Icons
+- **Lucide** icon set at 1.5 stroke, rounded caps and joins. No filled icons except for active tab states.
+- Default size 20px. Touch target 44px minimum (use padding, not scale).
+- Icons take their parent's text color. No multi-color icons in the UI.
+
+### Illustrations — the "cute" layer
+A small library of hand-drawn botanical + baby-object illustrations in a consistent style:
+
+- **Medium**: pencil or fine liner look, single-weight line, sage-700 stroke on linen.
+- **Subjects**: sprouts, leaves, acorns, bottles, moons, tiny shoes, wooden rattles, folded muslin.
+- **Where they appear**: empty states, milestone celebrations, onboarding, "day complete" moments. _Never_ in data-dense screens.
+- **Avoid**: 3D rendered characters, Pixar-style cartoon babies, pastel gradients, clip-art.
+
+A strong reference to paste into a generator: _"minimal single-line botanical illustration, sage ink on cream paper, Herbarium-style, no fill."_
+
+---
+
+## 6. Components
+
+### Buttons
+- **Primary**: `--sage-700` fill, linen text, pill radius, 48px height, Nunito 700, subtle press-scale to 0.97.
+- **Secondary**: transparent, 1.5px sage-500 border, sage-700 text.
+- **Ghost**: no border, sage-700 text, sage-100 background on hover.
+- **Destructive**: clay-colored outline, only used for deletes.
+
+All buttons have a 200ms ease-out transition and a `focus-visible` ring using `--shadow-focus`.
+
+### Inputs
+- 52px tall on mobile (generous for thumb typing).
+- `--linen-100` fill, 1px `--linen-200` border that darkens to `--sage-500` on focus.
+- Label sits _above_ the field, never inside — floating labels are a usability trap for one-handed use.
+- Optional helper text in `--ink-600` beneath.
+
+### Cards (the core atom)
+- `--linen-100` background, 1px `--linen-200` border, 20px radius, 20px padding.
+- Title in Nunito 700. Timestamp in Nunito 600 `--ink-400` micro-caps, top-right.
+- Tap anywhere on the card to expand/edit. No tiny buttons inside cards.
+
+### Chips & tags (food, allergens, moods)
+- Pill radius, sage-100 fill, sage-900 text, 11px caption, optional 14px leading icon.
+- Selected state: sage-500 fill, linen-50 text.
+- Allergen chips always use `--clay` coloring to stand out from regular tags.
+
+### Navigation
+- **Mobile**: bottom tab bar, 5 items max, filled icon + label on active. Active background is a sage-100 pill that morphs between tabs (Motion layoutId animation).
+- **Desktop**: left sidebar with the baby's name and avatar pinned at top.
+
+### Floating Action Button
+- Single FAB bottom-right on the timeline screen, 56px, `--sage-700` fill, plus icon. Expands on tap into a radial menu of quick log actions (feed, nap, diaper, note) with staggered 40ms delays.
+
+### Empty states
+Always illustrated. Example copy: _"No notes yet. Your first observation is waiting."_
+
+### Toasts
+Slide up from bottom, linen-100 fill, sage-500 left accent bar, auto-dismiss 3s with a progress underline. Swipe down to dismiss.
+
+---
+
+## 7. Content Patterns (the baby-specific screens)
+
+### Daily timeline
+The default screen. A vertical timeline with **time on the left rail** in Fraunces tabular, event cards on the right. Events grouped by morning / afternoon / evening / night with small botanical dividers between.
+
+Each event card shows icon + label + one key metric. Tap to expand for full notes, photos, duration.
+
+### Growth tracker
+Weight, height, head circumference. Rendered as a soft-curve line chart (no grid lines, no axis ticks — just the curve, two endpoint dots, and the WHO percentile band as a translucent sage shape behind it). Hover/tap a point reveals the measurement in a Fraunces-numbered card.
+
+### Food & allergy log
+Two-column structure: **Tried** and **Reactions**. Each food is a chip. Allergens auto-promote from Tried to a dedicated Allergies watchlist at the top of the page, flagged with `--clay`. Severity levels (mild / moderate / severe) use dot indicators, never stars.
+
+### Milestones
+A scrolling list of cards, each with its illustration, date achieved, and a short parent-written note. Completed milestones show a quiet peach checkmark in the corner, not a full celebration — the celebration happens _in the moment_ of logging, not permanently.
+
+### Notes / journal
+Rich-text but minimal: bold, italic, bullet, photo inline, voice memo. No headings, no tables — this is a journal, not a wiki. Each note has a sage leaf bullet on the left margin to signify it's a "planted" thought.
+
+### Quick log sheet
+Bottom sheet with 4 big buttons (Feed, Sleep, Diaper, Other), each 80px tall, icon + label. Selecting one opens a second sheet with minimal required fields and a big "Log" button. Should take under 5 seconds start to finish.
+
+---
+
+## 8. Motion & Interactions
+
+Motion is the biggest lever for "interactive and cute" without clutter.
+
+### Principles
+- **Easing**: always `cubic-bezier(0.32, 0.72, 0, 1)` (a soft overshoot). No linear. No harsh ease-in-out.
+- **Duration**: 200ms for state changes, 400ms for layout, 600ms for celebratory moments. Never longer.
+- **Stagger**: lists animate in with 40ms stagger on first load. Never on scroll.
+
+### Signature moments
+- **Log completion**: a tiny sage sprout grows from the card bottom for 600ms, then fades. Subtle haptic on mobile.
+- **Milestone unlocked**: full-screen gentle bloom animation (Lottie or SVG), peach-colored, with the milestone illustration rising into place. Sound optional and off-by-default.
+- **Pull-to-refresh**: the pull reveals a growing vine, not a spinner.
+- **Empty state illustrations**: a very slow 8-second breathing scale (1.00 → 1.02 → 1.00) on hover or idle.
+- **Tab switching**: the sage-100 pill on the bottom tab bar _morphs_ between tabs using shared-element animation.
+
+### Never
+- No bouncing. No spinning confetti. No physics-based slingshots. No auto-playing video. No aggressive parallax.
+
+---
+
+## 9. Accessibility
+
+- **Contrast**: all body text AA minimum (4.5:1), large text 3:1. `--sage-500` alone never carries meaning — always paired with an icon or label.
+- **Touch targets**: 44×44px absolute minimum, 48px preferred.
+- **Focus ring**: always visible via `--shadow-focus`. Never remove the outline.
+- **Motion**: respect `prefers-reduced-motion` — disable sprout animations, replace transitions with instant state changes.
+- **Screen readers**: all illustrations are `aria-hidden`. All icons in buttons have text labels or `aria-label`. Timeline events read as "8:30 AM, feed, 120ml, tap to expand."
+- **Language**: Vietnamese and English both supported. Fraunces and Nunito both render Vietnamese diacritics well — verify before shipping.
+
+---
+
+## 10. Tone of Voice
+
+Warm, quiet, specific. Never baby-talk. Never overly clinical.
+
+**Yes:** "Logged. Sweet dreams." · "Your first note is waiting." · "Weight added to growth chart."
+**No:** "Yay! 🎉 You did it!" · "Baby loves this!" · "Great job, mama!"
+
+Parent, not "mama" or "daddy." Baby's name, not "baby" — always pull the actual name.
+
+Empty states are gently inviting, not instructional. Error messages explain the cause without blame: "Couldn't save — try again when you're back online. We'll keep what you typed."
+
+---
+
+## 11. Responsive Strategy
+
+Mobile-first, always. Breakpoints:
+- `sm` 480 — phone
+- `md` 768 — large phone / small tablet
+- `lg` 1024 — tablet / small laptop
+- `xl` 1280 — desktop
+
+**Desktop is not just "wider mobile."** On `lg+`:
+- Left sidebar navigation replaces bottom tabs.
+- Timeline becomes two-column: events left, a persistent "today at a glance" summary right.
+- Growth charts become interactive with a larger tooltip card.
+- Quick-log stays as a sheet, invoked by a keyboard shortcut (`N` for new entry).
+
+---
+
+## 12. Prompt Template for Claude
+
+When asking Claude to design a specific screen, paste this block of context along with your request:
+
+> Use the Little Sprout design system: Moody Forest sage (#9CA57A) anchor, linen (#FAF7F1) backgrounds, Fraunces for headings and Nunito for body, 20px card radius, soft warm shadows, hand-drawn botanical illustrations as the "cute" layer, 70/25/5 color distribution, 48px touch targets, bottom tab bar on mobile. Aesthetic is "botanical journal" — grounded and serene, not pastel-cute. Parents use this one-handed while holding a baby. Motion is soft cubic-bezier(0.32, 0.72, 0, 1), celebratory moments bloom a peach or sage sprout. Build it as [React / HTML / artifact] with real data shapes, not lorem ipsum.
