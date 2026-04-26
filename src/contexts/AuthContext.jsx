@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { supabase } from '../lib/supabase.js'
+import { supabase, supabaseConfigured } from '../lib/supabase.js'
 
 const AuthContext = createContext(null)
 
@@ -8,6 +8,12 @@ export function AuthProvider({ children }) {
   const [session, setSession] = useState(undefined)
 
   useEffect(() => {
+    // Skip if Supabase is not configured — stay in loading=false / session=null state
+    if (!supabase) {
+      setSession(null)
+      return
+    }
+
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session ?? null)
     })
@@ -20,7 +26,7 @@ export function AuthProvider({ children }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ session, loading: session === undefined, supabase }}>
+    <AuthContext.Provider value={{ session, loading: session === undefined, supabase, supabaseConfigured }}>
       {children}
     </AuthContext.Provider>
   )
