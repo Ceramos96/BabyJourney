@@ -1,0 +1,153 @@
+/*
+ * Little Sprout — Design Tokens
+ * Extracted from Claude Design mockup (Little_Sprout.html + Baby_Journey_Mobile.html)
+ * All components reference these variables. Never hardcode hex values in components.
+ */
+
+:root {
+
+  /* ─── Canvas & Backgrounds ──────────────────── */
+  --canvas:        #EDE8DD;   /* outer canvas / page wrap */
+  --app-bg:        #FAF7F1;   /* main app background */
+  --card:          #F2ECE0;   /* card surface */
+  --card-border:   #E6DDCB;   /* card + input borders */
+
+  /* ─── Linen scale (neutrals, warm) ──────────── */
+  --linen-50:      #FBF8F2;
+  --linen-100:     #F2ECE0;   /* input background */
+  --linen-200:     #E6DDCB;   /* input border, dividers */
+
+  /* ─── Sage scale (brand) ─────────────────────── */
+  --sage-700:      #6B7A4F;   /* primary brand, buttons, active text */
+  --sage-500:      #9CA57A;   /* secondary brand, focus border */
+  --sage-300:      #BAC39A;   /* hover dividers */
+  --sage-100:      #E8EBD6;   /* chips, active tab pill, soft fills */
+  --sage-50:       #F0F2E0;   /* very subtle tints */
+
+  /* ─── Ink scale (text) ───────────────────────── */
+  --ink-900:       #2A2823;   /* primary body text */
+  --ink-600:       #6B665C;   /* secondary text, labels */
+  --ink-400:       #A8A193;   /* placeholders, metadata, inactive tabs */
+
+  /* ─── Accents (one per screen max) ──────────── */
+  --peach:         #E8B59C;   /* milestones, celebrations */
+  --peach-soft:    #F4D6C4;   /* milestone card backgrounds */
+  --clay:          #C08775;   /* allergy chips, warnings */
+  --butter:        #E8D191;   /* sleep logs, night tint */
+  --dusk:          #A99BB8;   /* health/medical tags */
+
+  /* ─── Semantic ────────────────────────────────── */
+  --success:       #7A9459;   /* deeper sage — confirmations */
+  --warning:       #D4A574;   /* warm ochre — soft alerts */
+  --danger:        #B85C4C;   /* terracotta — destructive */
+  --info:          #7A91A8;   /* dusk blue — informational */
+
+  /* ─── Shadows (warm, never grey) ─────────────── */
+  --shadow-sm:     0 2px 8px rgba(80, 70, 50, 0.08);
+  --shadow-md:     0 4px 12px rgba(80, 70, 50, 0.10);
+  --shadow-lg:     0 20px 60px rgba(80, 70, 50, 0.18);
+  --shadow-focus:  0 0 0 3px rgba(156, 165, 122, 0.35);  /* sage glow on focus */
+
+  /* ─── Border Radii ────────────────────────────── */
+  --r-xs:          8px;    /* chips, tags */
+  --r-sm:          10px;   /* segmented control items */
+  --r-md:          14px;   /* inputs, segmented control */
+  --r-lg:          20px;   /* cards, modals */
+  --r-xl:          28px;   /* bottom sheets, hero surfaces */
+  --r-pill:        999px;  /* buttons, avatars */
+
+  /* ─── Spacing scale (8-point) ─────────────────── */
+  --space-1:       4px;
+  --space-2:       8px;
+  --space-3:       12px;
+  --space-4:       16px;
+  --space-5:       20px;
+  --space-6:       24px;
+  --space-8:       32px;
+  --space-10:      40px;
+  --space-12:      48px;
+  --space-16:      64px;
+
+  /* ─── Typography ──────────────────────────────── */
+  --font-display:  'Fraunces', Georgia, serif;
+  --font-body:     'Nunito', system-ui, sans-serif;
+  --font-opsz:     "opsz" 48, "SOFT" 50;   /* Fraunces optical size settings */
+
+  /* ─── Font sizes ──────────────────────────────── */
+  --text-display:  40px;  /* hero screens */
+  --text-h1:       28px;  /* page titles */
+  --text-h2:       22px;  /* section titles */
+  --text-h3:       18px;  /* card titles */
+  --text-lg:       17px;  /* primary reading */
+  --text-base:     15px;  /* default UI */
+  --text-sm:       14px;  /* inputs, buttons */
+  --text-caption:  13px;  /* labels, metadata */
+  --text-micro:    11px;  /* uppercase tags, micro-caps */
+  --text-tiny:     10px;  /* chart labels */
+
+  /* ─── Component heights ───────────────────────── */
+  --input-height:       52px;
+  --btn-height:         40px;
+  --btn-height-lg:      48px;
+  --btn-height-sm:      36px;
+  --tab-bar-height:     83px;
+  --sidebar-width:      240px;
+  --topbar-height:      56px;
+  --fab-size:           56px;
+
+  /* ─── Motion ──────────────────────────────────── */
+  --ease-default:       cubic-bezier(0.32, 0.72, 0, 1);
+  --duration-fast:      150ms;
+  --duration-base:      200ms;
+  --duration-layout:    350ms;
+  --duration-celebrate: 600ms;
+}
+
+/* ─── Dark mode ────────────────────────────────────── */
+[data-theme="dark"] {
+  --app-bg:        #1E1C18;
+  --card:          #2A2723;
+  --card-border:   #3A3730;
+  --linen-50:      #252320;
+  --linen-100:     #2A2723;
+  --linen-200:     #3A3730;
+  --ink-900:       #F0EDE6;
+  --ink-600:       #C5BFB4;
+  --ink-400:       #7A7568;
+  --canvas:        #161410;
+}
+
+/* ─── Motion: respect user preference ──────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Sprout breathing animation ────────────────────── */
+@keyframes sprout-breathe {
+  0%, 100% { transform: scale(1.00); }
+  50%       { transform: scale(1.02); }
+}
+
+.sprout-breathe {
+  animation: sprout-breathe 6s ease-in-out infinite;
+}
+
+/* ─── Age counter animation (increments once on load) ── */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.age-counter {
+  animation: count-up 0.4s var(--ease-default) both;
+}
+
+/* ─── Safe area insets (Capacitor native) ─────────────── */
+.safe-top    { padding-top: env(safe-area-inset-top); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+.safe-left   { padding-left: env(safe-area-inset-left); }
+.safe-right  { padding-right: env(safe-area-inset-right); }

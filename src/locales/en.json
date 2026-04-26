@@ -1,0 +1,321 @@
+{
+  "app": {
+    "name": "Little Sprout",
+    "tagline": "Every little moment."
+  },
+
+  "nav": {
+    "home":    "Home",
+    "growth":  "Growth",
+    "journal": "Journal",
+    "health":  "Health",
+    "family":  "Family",
+    "log":     "Log"
+  },
+
+  "common": {
+    "save":        "Save",
+    "cancel":      "Cancel",
+    "edit":        "Edit",
+    "delete":      "Delete",
+    "close":       "Close",
+    "loading":     "Loading…",
+    "retry":       "Try again",
+    "done":        "Done",
+    "add":         "Add",
+    "view_all":    "View all",
+    "coming_soon": "Coming soon",
+    "not_yet":     "Not yet",
+    "optional":    "Optional",
+    "now":         "Now",
+    "today":       "Today",
+    "this_week":   "This week",
+    "ml":          "ml",
+    "kg":          "kg",
+    "cm":          "cm",
+    "h":           "h",
+    "min":         "min",
+    "ago":         "ago",
+    "in":          "in",
+    "months_old":  "{{months}} months · {{days}} days old"
+  },
+
+  "home": {
+    "page_title":         "Today",
+    "greeting_morning":   "Good morning, {{name}} 👋",
+    "greeting_afternoon": "Good afternoon, {{name}} 👋",
+    "greeting_evening":   "Good evening, {{name}} 👋",
+    "greeting_night":     "Good night, {{name}} 🌙",
+    "log_something":      "Log something",
+    "vitals": {
+      "feeds_today":     "feeds today",
+      "total_sleep":     "total sleep",
+      "last_diaper":     "last diaper",
+      "last_weight":     "last weight"
+    },
+    "suggestion": {
+      "feed_title":        "Time for a feed?",
+      "feed_body":         "Last feed was {{duration}} ago",
+      "nap_title":         "Nap window approaching",
+      "nap_body":          "Khang usually naps around {{time}}",
+      "milestone_title":   "Milestone coming up",
+      "milestone_body":    "{{name}} — most babies by {{months}} months",
+      "log_feed":          "Log feed →",
+      "log_nap":           "Log nap →",
+      "view_milestones":   "View milestones →"
+    },
+    "weekly_chart": {
+      "label":          "This week",
+      "avg_feeds":      "avg {{n}} feeds/day",
+      "avg_sleep":      "avg {{h}}h {{m}}m sleep/day"
+    },
+    "coming_soon": {
+      "label":          "Coming soon",
+      "soon_badge":     "Soon"
+    },
+    "timeline": {
+      "label":          "Today's log",
+      "empty":          "No entries yet. Tap + to log Khang's first moment.",
+      "morning":        "Morning",
+      "afternoon":      "Afternoon",
+      "evening":        "Evening",
+      "night":          "Night",
+      "expand":         "Tap to expand"
+    },
+    "recent_photos": {
+      "label":          "Recent memories",
+      "view_all":       "View all photos →"
+    }
+  },
+
+  "quicklog": {
+    "title":           "Log something",
+    "choose_type":     "What would you like to log?",
+    "time_label":      "Time",
+    "notes_label":     "Notes",
+    "notes_placeholder": "Any observations…",
+    "feed_form": {
+      "amount_label":  "Amount",
+      "type_label":    "Type",
+      "breast":        "Breast",
+      "formula":       "Formula",
+      "solids":        "Solids"
+    },
+    "nap_form": {
+      "start_label":   "Start time",
+      "end_label":     "End time",
+      "duration_label":"Duration",
+      "quality_label": "Quality",
+      "poor":          "Poor",
+      "good":          "Good",
+      "great":         "Great"
+    },
+    "diaper_form": {
+      "type_label":    "Type",
+      "wet":           "Wet",
+      "dirty":         "Dirty",
+      "both":          "Both"
+    },
+    "log_types": {
+      "feed":   "Feed",
+      "nap":    "Nap",
+      "diaper": "Diaper",
+      "note":   "Note",
+      "weight": "Weight",
+      "height": "Height"
+    },
+    "saved":           "Logged ✓",
+    "saving":          "Saving…"
+  },
+
+  "growth": {
+    "page_title":      "Growth",
+    "title":           "{{name}}'s Growth",
+    "weight":          "Weight",
+    "height":          "Height",
+    "head":            "Head",
+    "percentile":      "Percentile",
+    "who_band":        "WHO reference",
+    "add_measurement": "Add measurement",
+    "date_label":      "Date",
+    "value_label":     "Value",
+    "history":         "History",
+    "history_empty":   "No measurements yet. Add the first one above.",
+    "tooltip_date":    "{{date}}",
+    "chart_empty":     "No data yet. Add your first measurement.",
+    "table": {
+      "date":   "Date",
+      "weight": "Weight",
+      "height": "Height",
+      "head":   "Head",
+      "pct":    "Percentile"
+    }
+  },
+
+  "journal": {
+    "page_title":   "Journal",
+    "tabs": {
+      "photos":     "Photos",
+      "milestones": "Milestones"
+    },
+    "photos": {
+      "title":          "{{name}}'s Journal",
+      "upload":         "Upload photo",
+      "uploading":      "Uploading…",
+      "compressed":     "Compressed to {{size}}",
+      "empty":          "No photos yet. Capture your first memory.",
+      "caption_label":  "Caption",
+      "caption_placeholder": "Add a caption…",
+      "drive_link_label":    "Or paste a Google Drive link",
+      "drive_placeholder":   "https://drive.google.com/file/d/…",
+      "drive_reminder":      "Make sure the file is shared with \"Anyone with the link\" in Google Drive.",
+      "drive_error":         "This photo is no longer accessible. Make sure it is shared with Anyone with the link.",
+      "lightbox": {
+        "edit_caption": "Edit caption",
+        "delete":       "Delete photo",
+        "share":        "Share"
+      }
+    },
+    "milestones": {
+      "title":          "Milestones",
+      "log_milestone":  "+ Log a milestone",
+      "completed":      "Achieved",
+      "not_yet":        "Not yet",
+      "log_modal": {
+        "title":        "Log a milestone",
+        "milestone_label": "Milestone",
+        "date_label":   "Date achieved",
+        "note_label":   "Note",
+        "note_placeholder": "What was this moment like?",
+        "photo_label":  "Add a photo (optional)"
+      },
+      "list": {
+        "first_smile":       "First smile",
+        "rolled_over":       "Rolled over",
+        "first_laugh":       "First laugh",
+        "sat_unaided":       "Sat unaided",
+        "first_solid":       "First solid food",
+        "first_word":        "First word",
+        "crawled":           "Crawled",
+        "pulled_to_stand":   "Pulled to stand",
+        "first_steps":       "First steps"
+      },
+      "celebration": {
+        "title":   "🌱 Milestone reached!",
+        "body":    "{{name}} achieved {{milestone}}",
+        "date":    "on {{date}}"
+      }
+    }
+  },
+
+  "health": {
+    "page_title": "Health",
+    "tabs": {
+      "notes":          "Notes",
+      "allergies_food": "Allergies & Food",
+      "vaccinations":   "Vaccinations"
+    },
+    "notes": {
+      "title":             "Notes",
+      "add":               "+ Add note",
+      "empty":             "No notes yet. Your first observation is waiting.",
+      "placeholder":       "Write a note…",
+      "tags_label":        "Tags",
+      "tag_options": {
+        "allergy":         "Allergy",
+        "vaccination":     "Vaccination",
+        "observation":     "Observation",
+        "medication":      "Medication"
+      }
+    },
+    "allergies": {
+      "title":             "Allergies",
+      "add":               "+ Track allergen",
+      "empty":             "No allergens tracked yet.",
+      "name_label":        "Allergen name",
+      "severity_label":    "Severity",
+      "mild":              "Mild",
+      "moderate":          "Moderate",
+      "severe":            "Severe",
+      "first_reaction":    "First reaction",
+      "severity_dots":     "{{n}} dot"
+    },
+    "food": {
+      "title":             "Food tried",
+      "add":               "+ Add food",
+      "empty":             "No foods logged yet.",
+      "name_placeholder":  "e.g. Sweet potato"
+    },
+    "vaccinations": {
+      "title":             "Vaccinations",
+      "add":               "+ Add vaccination",
+      "empty":             "No vaccinations logged yet.",
+      "done":              "Done",
+      "upcoming":          "Upcoming",
+      "due":               "Due {{date}}",
+      "name_label":        "Vaccine name",
+      "due_label":         "Due date",
+      "done_label":        "Date given"
+    }
+  },
+
+  "family": {
+    "page_title":  "Family",
+    "subtitle":    "Manage who can see {{name}}'s journey",
+    "roles": {
+      "owner":     "Owner",
+      "family":    "Family",
+      "viewer":    "Viewer"
+    },
+    "you":              "You",
+    "last_active":      "Active {{time}}",
+    "change_role":      "Change role",
+    "remove":           "Remove",
+    "invite": {
+      "button":         "+ Invite someone",
+      "email_label":    "Email address",
+      "email_placeholder": "name@example.com",
+      "role_label":     "Role",
+      "send":           "Send invite",
+      "sent":           "Invite sent ✓"
+    },
+    "pending": {
+      "title":          "Pending invites",
+      "resend":         "Resend",
+      "cancel":         "Cancel"
+    }
+  },
+
+  "auth": {
+    "login_title":      "Welcome back",
+    "login_subtitle":   "Sign in to continue",
+    "email_label":      "Email",
+    "email_placeholder":"your@email.com",
+    "password_label":   "Password",
+    "sign_in":          "Sign in",
+    "signing_in":       "Signing in…",
+    "no_account":       "Don't have an account? You need an invitation.",
+    "invite_accept_title": "You've been invited!",
+    "invite_accept_body":  "Set a password to join {{family}}",
+    "set_password":     "Set password",
+    "password_placeholder": "Choose a password"
+  },
+
+  "errors": {
+    "save_failed_offline": "Couldn't save — you appear to be offline. We've kept what you typed.",
+    "photo_load_failed":   "This photo is no longer accessible. Make sure it is shared with Anyone with the link.",
+    "load_failed":         "Couldn't load — pull to refresh.",
+    "generic":             "Something went wrong. Please try again.",
+    "session_expired":     "Your session has expired. Please sign in again.",
+    "permission_denied":   "You don't have permission to do that."
+  },
+
+  "settings": {
+    "language":           "Language",
+    "en":                 "EN",
+    "vi":                 "VI",
+    "dark_mode":          "Dark mode",
+    "notifications":      "Notifications",
+    "sign_out":           "Sign out"
+  }
+}

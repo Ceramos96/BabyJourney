@@ -1,0 +1,321 @@
+{
+  "app": {
+    "name": "Little Sprout",
+    "tagline": "Từng khoảnh khắc nhỏ."
+  },
+
+  "nav": {
+    "home":    "Trang chủ",
+    "growth":  "Tăng trưởng",
+    "journal": "Nhật ký",
+    "health":  "Sức khoẻ",
+    "family":  "Gia đình",
+    "log":     "Ghi lại"
+  },
+
+  "common": {
+    "save":        "Lưu",
+    "cancel":      "Huỷ",
+    "edit":        "Chỉnh sửa",
+    "delete":      "Xoá",
+    "close":       "Đóng",
+    "loading":     "Đang tải…",
+    "retry":       "Thử lại",
+    "done":        "Xong",
+    "add":         "Thêm",
+    "view_all":    "Xem tất cả",
+    "coming_soon": "Sắp đạt được",
+    "not_yet":     "Chưa đạt",
+    "optional":    "Tuỳ chọn",
+    "now":         "Bây giờ",
+    "today":       "Hôm nay",
+    "this_week":   "Tuần này",
+    "ml":          "ml",
+    "kg":          "kg",
+    "cm":          "cm",
+    "h":           "h",
+    "min":         "phút",
+    "ago":         "trước",
+    "in":          "sau",
+    "months_old":  "{{months}} tháng · {{days}} ngày tuổi"
+  },
+
+  "home": {
+    "page_title":         "Hôm nay",
+    "greeting_morning":   "Chào buổi sáng, {{name}} 👋",
+    "greeting_afternoon": "Chào buổi chiều, {{name}} 👋",
+    "greeting_evening":   "Chào buổi tối, {{name}} 👋",
+    "greeting_night":     "Chúc ngủ ngon, {{name}} 🌙",
+    "log_something":      "Ghi lại",
+    "vitals": {
+      "feeds_today":     "lần ti hôm nay",
+      "total_sleep":     "tổng giấc ngủ",
+      "last_diaper":     "thay tã lần cuối",
+      "last_weight":     "cân nặng gần nhất"
+    },
+    "suggestion": {
+      "feed_title":        "Đến giờ ti chưa?",
+      "feed_body":         "Lần ti cuối cách đây {{duration}}",
+      "nap_title":         "Sắp đến giấc ngủ ngắn",
+      "nap_body":          "Bé thường ngủ trưa lúc {{time}}",
+      "milestone_title":   "Cột mốc sắp đến",
+      "milestone_body":    "{{name}} — hầu hết bé đạt được lúc {{months}} tháng",
+      "log_feed":          "Ghi lại ti →",
+      "log_nap":           "Ghi lại ngủ →",
+      "view_milestones":   "Xem cột mốc →"
+    },
+    "weekly_chart": {
+      "label":          "Tuần này",
+      "avg_feeds":      "tb {{n}} lần ti/ngày",
+      "avg_sleep":      "tb {{h}}h {{m}}p ngủ/ngày"
+    },
+    "coming_soon": {
+      "label":          "Sắp đạt được",
+      "soon_badge":     "Sắp tới"
+    },
+    "timeline": {
+      "label":          "Nhật ký hôm nay",
+      "empty":          "Chưa có ghi chép nào. Nhấn + để ghi lại khoảnh khắc đầu tiên của Khang.",
+      "morning":        "Buổi sáng",
+      "afternoon":      "Buổi chiều",
+      "evening":        "Buổi tối",
+      "night":          "Ban đêm",
+      "expand":         "Nhấn để xem thêm"
+    },
+    "recent_photos": {
+      "label":          "Kỷ niệm gần đây",
+      "view_all":       "Xem tất cả ảnh →"
+    }
+  },
+
+  "quicklog": {
+    "title":           "Ghi lại",
+    "choose_type":     "Bạn muốn ghi lại điều gì?",
+    "time_label":      "Thời gian",
+    "notes_label":     "Ghi chú",
+    "notes_placeholder": "Nhận xét thêm…",
+    "feed_form": {
+      "amount_label":  "Lượng ti",
+      "type_label":    "Loại",
+      "breast":        "Bú mẹ",
+      "formula":       "Sữa công thức",
+      "solids":        "Ăn dặm"
+    },
+    "nap_form": {
+      "start_label":   "Giờ bắt đầu",
+      "end_label":     "Giờ kết thúc",
+      "duration_label":"Thời lượng",
+      "quality_label": "Chất lượng giấc ngủ",
+      "poor":          "Không ngon",
+      "good":          "Bình thường",
+      "great":         "Ngon giấc"
+    },
+    "diaper_form": {
+      "type_label":    "Loại tã",
+      "wet":           "Tã ướt",
+      "dirty":         "Tã bẩn",
+      "both":          "Cả hai"
+    },
+    "log_types": {
+      "feed":   "Cho ti",
+      "nap":    "Giấc ngủ",
+      "diaper": "Thay tã",
+      "note":   "Ghi chú",
+      "weight": "Cân nặng",
+      "height": "Chiều cao"
+    },
+    "saved":           "Đã ghi lại ✓",
+    "saving":          "Đang lưu…"
+  },
+
+  "growth": {
+    "page_title":      "Tăng trưởng",
+    "title":           "Tăng trưởng của {{name}}",
+    "weight":          "Cân nặng",
+    "height":          "Chiều cao",
+    "head":            "Vòng đầu",
+    "percentile":      "Phân vị",
+    "who_band":        "Chuẩn WHO",
+    "add_measurement": "Thêm số đo",
+    "date_label":      "Ngày",
+    "value_label":     "Giá trị",
+    "history":         "Lịch sử",
+    "history_empty":   "Chưa có số đo nào. Thêm số đo đầu tiên ở trên.",
+    "tooltip_date":    "{{date}}",
+    "chart_empty":     "Chưa có dữ liệu. Thêm số đo đầu tiên của bé.",
+    "table": {
+      "date":   "Ngày",
+      "weight": "Cân nặng",
+      "height": "Chiều cao",
+      "head":   "Vòng đầu",
+      "pct":    "Phân vị"
+    }
+  },
+
+  "journal": {
+    "page_title":   "Nhật ký",
+    "tabs": {
+      "photos":     "Ảnh",
+      "milestones": "Cột mốc"
+    },
+    "photos": {
+      "title":          "Nhật ký của {{name}}",
+      "upload":         "Tải ảnh lên",
+      "uploading":      "Đang tải…",
+      "compressed":     "Đã nén còn {{size}}",
+      "empty":          "Chưa có ảnh nào. Lưu giữ kỷ niệm đầu tiên của bé.",
+      "caption_label":  "Chú thích",
+      "caption_placeholder": "Thêm chú thích…",
+      "drive_link_label":    "Hoặc dán đường dẫn Google Drive",
+      "drive_placeholder":   "https://drive.google.com/file/d/…",
+      "drive_reminder":      "Đảm bảo ảnh được chia sẻ với \"Bất kỳ ai có đường dẫn\" trong Google Drive.",
+      "drive_error":         "Không thể truy cập ảnh này. Kiểm tra lại cài đặt chia sẻ trong Google Drive.",
+      "lightbox": {
+        "edit_caption": "Chỉnh sửa chú thích",
+        "delete":       "Xoá ảnh",
+        "share":        "Chia sẻ"
+      }
+    },
+    "milestones": {
+      "title":          "Cột mốc phát triển",
+      "log_milestone":  "+ Ghi lại cột mốc",
+      "completed":      "Đã đạt được",
+      "not_yet":        "Chưa đạt",
+      "log_modal": {
+        "title":        "Ghi lại cột mốc",
+        "milestone_label": "Cột mốc",
+        "date_label":   "Ngày đạt được",
+        "note_label":   "Ghi chú",
+        "note_placeholder": "Khoảnh khắc này như thế nào?",
+        "photo_label":  "Thêm ảnh (tuỳ chọn)"
+      },
+      "list": {
+        "first_smile":       "Nụ cười đầu tiên",
+        "rolled_over":       "Lật người",
+        "first_laugh":       "Tiếng cười đầu tiên",
+        "sat_unaided":       "Ngồi được một mình",
+        "first_solid":       "Ăn dặm lần đầu",
+        "first_word":        "Tiếng nói đầu tiên",
+        "crawled":           "Biết bò",
+        "pulled_to_stand":   "Vịn đứng dậy",
+        "first_steps":       "Những bước đi đầu tiên"
+      },
+      "celebration": {
+        "title":   "🌱 Cột mốc mới!",
+        "body":    "{{name}} vừa đạt được {{milestone}}",
+        "date":    "vào ngày {{date}}"
+      }
+    }
+  },
+
+  "health": {
+    "page_title": "Sức khoẻ",
+    "tabs": {
+      "notes":          "Ghi chú",
+      "allergies_food": "Dị ứng & Thức ăn",
+      "vaccinations":   "Tiêm chủng"
+    },
+    "notes": {
+      "title":             "Ghi chú",
+      "add":               "+ Thêm ghi chú",
+      "empty":             "Chưa có ghi chú nào. Quan sát đầu tiên của bạn đang chờ.",
+      "placeholder":       "Viết ghi chú…",
+      "tags_label":        "Thẻ phân loại",
+      "tag_options": {
+        "allergy":         "Dị ứng",
+        "vaccination":     "Tiêm chủng",
+        "observation":     "Quan sát",
+        "medication":      "Thuốc"
+      }
+    },
+    "allergies": {
+      "title":             "Dị ứng",
+      "add":               "+ Theo dõi dị ứng mới",
+      "empty":             "Chưa theo dõi dị ứng nào.",
+      "name_label":        "Tên chất gây dị ứng",
+      "severity_label":    "Mức độ",
+      "mild":              "Nhẹ",
+      "moderate":          "Trung bình",
+      "severe":            "Nặng",
+      "first_reaction":    "Phản ứng lần đầu",
+      "severity_dots":     "{{n}} chấm"
+    },
+    "food": {
+      "title":             "Thức ăn đã thử",
+      "add":               "+ Thêm thức ăn",
+      "empty":             "Chưa ghi nhận thức ăn nào.",
+      "name_placeholder":  "Vd: Khoai lang"
+    },
+    "vaccinations": {
+      "title":             "Tiêm chủng",
+      "add":               "+ Thêm mũi tiêm",
+      "empty":             "Chưa ghi nhận tiêm chủng nào.",
+      "done":              "Đã tiêm",
+      "upcoming":          "Sắp tới",
+      "due":               "Lịch hẹn {{date}}",
+      "name_label":        "Tên vắc-xin",
+      "due_label":         "Ngày hẹn tiêm",
+      "done_label":        "Ngày đã tiêm"
+    }
+  },
+
+  "family": {
+    "page_title":  "Gia đình",
+    "subtitle":    "Quản lý ai có thể xem hành trình của {{name}}",
+    "roles": {
+      "owner":     "Chủ sở hữu",
+      "family":    "Gia đình",
+      "viewer":    "Xem"
+    },
+    "you":              "Bạn",
+    "last_active":      "Hoạt động {{time}}",
+    "change_role":      "Đổi vai trò",
+    "remove":           "Xoá",
+    "invite": {
+      "button":         "+ Mời thành viên",
+      "email_label":    "Địa chỉ email",
+      "email_placeholder": "ten@email.com",
+      "role_label":     "Vai trò",
+      "send":           "Gửi lời mời",
+      "sent":           "Đã gửi lời mời ✓"
+    },
+    "pending": {
+      "title":          "Lời mời đang chờ",
+      "resend":         "Gửi lại",
+      "cancel":         "Huỷ"
+    }
+  },
+
+  "auth": {
+    "login_title":      "Chào mừng trở lại",
+    "login_subtitle":   "Đăng nhập để tiếp tục",
+    "email_label":      "Email",
+    "email_placeholder":"email@cua.ban.com",
+    "password_label":   "Mật khẩu",
+    "sign_in":          "Đăng nhập",
+    "signing_in":       "Đang đăng nhập…",
+    "no_account":       "Chưa có tài khoản? Bạn cần được mời.",
+    "invite_accept_title": "Bạn đã được mời!",
+    "invite_accept_body":  "Tạo mật khẩu để tham gia {{family}}",
+    "set_password":     "Tạo mật khẩu",
+    "password_placeholder": "Chọn mật khẩu"
+  },
+
+  "errors": {
+    "save_failed_offline": "Không thể lưu — có vẻ bạn đang offline. Nội dung bạn nhập vẫn được giữ lại.",
+    "photo_load_failed":   "Không thể truy cập ảnh này. Kiểm tra lại xem ảnh đã được chia sẻ với 'Bất kỳ ai có đường dẫn' chưa.",
+    "load_failed":         "Không thể tải — kéo để làm mới.",
+    "generic":             "Có lỗi xảy ra. Vui lòng thử lại.",
+    "session_expired":     "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
+    "permission_denied":   "Bạn không có quyền thực hiện thao tác này."
+  },
+
+  "settings": {
+    "language":           "Ngôn ngữ",
+    "en":                 "EN",
+    "vi":                 "VI",
+    "dark_mode":          "Chế độ tối",
+    "notifications":      "Thông báo",
+    "sign_out":           "Đăng xuất"
+  }
+}
