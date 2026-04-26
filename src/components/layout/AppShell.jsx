@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
 import { useAuth } from '../../contexts/AuthContext.jsx'
 import { usePlatform } from '../../hooks/usePlatform.js'
 import { ROUTES } from '../../config/navigation.js'
@@ -8,11 +7,11 @@ import BottomTabBar from './BottomTabBar.jsx'
 import Sidebar from './Sidebar.jsx'
 import TopBar from './TopBar.jsx'
 import FAB from './FAB.jsx'
+import QuickLog from '../../screens/QuickLog/index.jsx'
 
 export default function AppShell() {
   const { session, loading } = useAuth()
   const { isNative } = usePlatform()
-  const { t } = useTranslation()
   const navigate = useNavigate()
   const [quickLogOpen, setQuickLogOpen] = useState(false)
 
@@ -52,12 +51,13 @@ export default function AppShell() {
           flex: 1,
           overflow: 'auto',
           paddingTop: 'env(safe-area-inset-top)',
-          paddingBottom: '24px', // clearance for FAB protrusion above tab bar
+          paddingBottom: '24px',
           overscrollBehavior: 'contain',
         }}>
           <Outlet context={{ quickLogOpen, setQuickLogOpen }} />
         </div>
         <BottomTabBar onFABPress={() => setQuickLogOpen(true)} />
+        <QuickLog open={quickLogOpen} onClose={() => setQuickLogOpen(false)} />
       </div>
     )
   }
@@ -88,52 +88,7 @@ export default function AppShell() {
         </main>
       </div>
       <FAB onPress={() => setQuickLogOpen(true)} />
-
-      {/* Quick Log modal — placeholder until QuickLog screen is built */}
-      {quickLogOpen && (
-        <div
-          onClick={() => setQuickLogOpen(false)}
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'rgba(42, 40, 35, 0.4)',
-            zIndex: 300,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <div
-            onClick={e => e.stopPropagation()}
-            className="ls-card"
-            style={{ padding: '32px', maxWidth: 480, width: '90%' }}
-          >
-            <p style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'var(--text-h2)',
-              color: 'var(--ink-900)',
-              margin: '0 0 8px',
-            }}>
-              {t('quicklog.title')}
-            </p>
-            <p style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 'var(--text-sm)',
-              color: 'var(--ink-400)',
-              margin: 0,
-            }}>
-              {t('quicklog.choose_type')}
-            </p>
-            <button
-              onClick={() => setQuickLogOpen(false)}
-              className="ls-btn-ghost"
-              style={{ marginTop: '24px' }}
-            >
-              {t('common.close')}
-            </button>
-          </div>
-        </div>
-      )}
+      <QuickLog open={quickLogOpen} onClose={() => setQuickLogOpen(false)} />
     </div>
   )
 }
