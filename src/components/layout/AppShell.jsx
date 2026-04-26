@@ -8,6 +8,7 @@ import Sidebar from './Sidebar.jsx'
 import TopBar from './TopBar.jsx'
 import FAB from './FAB.jsx'
 import QuickLog from '../../screens/QuickLog/index.jsx'
+import InstallPrompt from '../ui/InstallPrompt.jsx'
 
 export default function AppShell() {
   const { session, loading } = useAuth()
@@ -89,6 +90,7 @@ export default function AppShell() {
       </div>
       <FAB onPress={() => setQuickLogOpen(true)} />
       <QuickLog open={quickLogOpen} onClose={() => setQuickLogOpen(false)} />
+      <InstallPrompt />
     </div>
   )
 }
