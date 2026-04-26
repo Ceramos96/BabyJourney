@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../../contexts/AuthContext.jsx'
 import { usePlatform } from '../../hooks/usePlatform.js'
 import { ROUTES } from '../../config/navigation.js'
@@ -11,6 +12,7 @@ import FAB from './FAB.jsx'
 export default function AppShell() {
   const { session, loading } = useAuth()
   const { isNative } = usePlatform()
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const [quickLogOpen, setQuickLogOpen] = useState(false)
 
@@ -28,16 +30,16 @@ export default function AppShell() {
         alignItems: 'center',
         justifyContent: 'center',
         background: 'var(--app-bg)',
-        fontFamily: 'var(--font-display)',
-        fontSize: '40px',
+        fontSize: '44px',
       }}>
-        🌱
+        <span className="sprout-breathe" aria-hidden="true">🌱</span>
       </div>
     )
   }
 
   if (!session) return null
 
+  // ── Native (Capacitor) layout ──────────────────────────────────
   if (isNative) {
     return (
       <div style={{
@@ -50,6 +52,7 @@ export default function AppShell() {
           flex: 1,
           overflow: 'auto',
           paddingTop: 'env(safe-area-inset-top)',
+          paddingBottom: '24px', // clearance for FAB protrusion above tab bar
           overscrollBehavior: 'contain',
         }}>
           <Outlet context={{ quickLogOpen, setQuickLogOpen }} />
@@ -59,6 +62,7 @@ export default function AppShell() {
     )
   }
 
+  // ── Web layout ─────────────────────────────────────────────────
   return (
     <div style={{
       display: 'flex',
@@ -85,12 +89,13 @@ export default function AppShell() {
       </div>
       <FAB onPress={() => setQuickLogOpen(true)} />
 
-      {/* Quick Log modal placeholder — will be built in QuickLog screen pass */}
+      {/* Quick Log modal — placeholder until QuickLog screen is built */}
       {quickLogOpen && (
         <div
           onClick={() => setQuickLogOpen(false)}
           style={{
-            position: 'fixed', inset: 0,
+            position: 'fixed',
+            inset: 0,
             background: 'rgba(42, 40, 35, 0.4)',
             zIndex: 300,
             display: 'flex',
@@ -103,18 +108,28 @@ export default function AppShell() {
             className="ls-card"
             style={{ padding: '32px', maxWidth: 480, width: '90%' }}
           >
-            <p style={{ fontFamily: 'var(--font-display)', fontSize: '22px', color: 'var(--ink-900)', marginBottom: '8px' }}>
-              Quick Log
+            <p style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'var(--text-h2)',
+              color: 'var(--ink-900)',
+              margin: '0 0 8px',
+            }}>
+              {t('quicklog.title')}
             </p>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--ink-400)' }}>
-              Coming soon — QuickLog screen will open here.
+            <p style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: 'var(--text-sm)',
+              color: 'var(--ink-400)',
+              margin: 0,
+            }}>
+              {t('quicklog.choose_type')}
             </p>
             <button
               onClick={() => setQuickLogOpen(false)}
               className="ls-btn-ghost"
               style={{ marginTop: '24px' }}
             >
-              Close
+              {t('common.close')}
             </button>
           </div>
         </div>

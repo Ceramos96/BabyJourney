@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Home, TrendingUp, BookOpen, Heart, Users } from 'lucide-react'
@@ -14,6 +15,7 @@ export default function Sidebar() {
   const { t, i18n } = useTranslation()
   const { session, supabase } = useAuth()
   const { months, days } = getBabyAge()
+  const [hoveredId, setHoveredId] = useState(null)
 
   const isActive = (route) => {
     if (route === '/') return location.pathname === '/' || location.pathname === '/home'
@@ -24,19 +26,53 @@ export default function Sidebar() {
     await supabase.auth.signOut()
   }
 
-  const navItemStyle = (active) => ({
-    display: 'flex',
-    alignItems: 'center',
-    gap: '10px',
-    padding: '10px 12px',
-    borderRadius: '10px',
-    background: active ? 'var(--sage-100)' : 'transparent',
-    border: 'none',
-    cursor: 'pointer',
-    width: '100%',
-    textAlign: 'left',
-    transition: 'background var(--duration-fast) var(--ease-default)',
-  })
+  const renderNavItem = (item) => {
+    const Icon = ICON_MAP[item.icon]
+    const active = isActive(item.route)
+    const hovered = hoveredId === item.id
+
+    return (
+      <button
+        key={item.id}
+        onClick={() => navigate(item.route)}
+        onMouseEnter={() => setHoveredId(item.id)}
+        onMouseLeave={() => setHoveredId(null)}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          padding: '10px 12px',
+          borderRadius: '10px',
+          background: active
+            ? 'var(--sage-100)'
+            : hovered
+              ? 'var(--linen-100)'
+              : 'transparent',
+          border: 'none',
+          cursor: 'pointer',
+          width: '100%',
+          textAlign: 'left',
+          transition: 'background var(--duration-fast) var(--ease-default)',
+        }}
+      >
+        {Icon && (
+          <Icon
+            size={18}
+            strokeWidth={active ? 2.5 : 1.5}
+            color={active ? 'var(--sage-700)' : 'var(--ink-600)'}
+          />
+        )}
+        <span style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: 'var(--text-sm)',
+          fontWeight: active ? 700 : 500,
+          color: active ? 'var(--sage-700)' : 'var(--ink-600)',
+        }}>
+          {t(item.labelKey)}
+        </span>
+      </button>
+    )
+  }
 
   return (
     <nav style={{
@@ -51,14 +87,19 @@ export default function Sidebar() {
       gap: '2px',
       overflowY: 'auto',
     }}>
+
       {/* Baby header */}
       <div style={{ padding: '0 8px 20px', flexShrink: 0 }}>
         <div style={{
-          width: 48, height: 48,
+          width: 48,
+          height: 48,
           borderRadius: 'var(--r-pill)',
           background: 'var(--sage-100)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '22px', marginBottom: '10px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '22px',
+          marginBottom: '10px',
         }}>
           {appConfig.baby.avatarPlaceholder}
         </div>
@@ -83,57 +124,16 @@ export default function Sidebar() {
       </div>
 
       {/* Main nav */}
-      {SIDEBAR_NAV.map((item) => {
-        const Icon = ICON_MAP[item.icon]
-        const active = isActive(item.route)
-        return (
-          <button
-            key={item.id}
-            onClick={() => navigate(item.route)}
-            style={navItemStyle(active)}
-          >
-            {Icon && <Icon size={18} strokeWidth={active ? 2.5 : 1.5} color={active ? 'var(--sage-700)' : 'var(--ink-600)'} />}
-            <span style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 'var(--text-sm)',
-              fontWeight: active ? 700 : 500,
-              color: active ? 'var(--sage-700)' : 'var(--ink-600)',
-            }}>
-              {t(item.labelKey)}
-            </span>
-          </button>
-        )
-      })}
+      {SIDEBAR_NAV.map(renderNavItem)}
 
       <hr className="ls-divider" style={{ margin: '8px 0' }} />
 
-      {/* Family */}
-      {SIDEBAR_BOTTOM_NAV.map((item) => {
-        const Icon = ICON_MAP[item.icon]
-        const active = isActive(item.route)
-        return (
-          <button
-            key={item.id}
-            onClick={() => navigate(item.route)}
-            style={navItemStyle(active)}
-          >
-            {Icon && <Icon size={18} strokeWidth={active ? 2.5 : 1.5} color={active ? 'var(--sage-700)' : 'var(--ink-600)'} />}
-            <span style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 'var(--text-sm)',
-              fontWeight: active ? 700 : 500,
-              color: active ? 'var(--sage-700)' : 'var(--ink-600)',
-            }}>
-              {t(item.labelKey)}
-            </span>
-          </button>
-        )
-      })}
+      {/* Family nav */}
+      {SIDEBAR_BOTTOM_NAV.map(renderNavItem)}
 
-      {/* Spacer */}
       <div style={{ flex: 1 }} />
 
-      {/* Bottom strip */}
+      {/* Bottom strip: language toggle + user avatar */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -142,6 +142,8 @@ export default function Sidebar() {
         borderTop: '1px solid var(--linen-200)',
         flexShrink: 0,
       }}>
+
+        {/* EN / VI segmented toggle */}
         <div style={{
           display: 'flex',
           background: 'var(--linen-100)',
@@ -168,7 +170,7 @@ export default function Sidebar() {
                   borderRadius: 6,
                   boxShadow: active ? 'var(--shadow-sm)' : 'none',
                   transition: 'all var(--duration-fast) var(--ease-default)',
-                  letterSpacing: '0.03em',
+                  letterSpacing: '0.04em',
                 }}
               >
                 {lang.toUpperCase()}
@@ -176,12 +178,16 @@ export default function Sidebar() {
             )
           })}
         </div>
+
         <div style={{ flex: 1 }} />
+
+        {/* User avatar — tap to sign out */}
         <button
           onClick={handleSignOut}
           title={t('settings.sign_out')}
           style={{
-            width: 32, height: 32,
+            width: 32,
+            height: 32,
             borderRadius: 'var(--r-pill)',
             background: 'var(--linen-200)',
             border: 'none',
@@ -189,7 +195,12 @@ export default function Sidebar() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '14px',
+            fontFamily: 'var(--font-body)',
+            fontSize: '13px',
+            fontWeight: 700,
+            color: 'var(--ink-600)',
+            transition: 'background var(--duration-fast) var(--ease-default)',
+            flexShrink: 0,
           }}
         >
           {session?.user?.email?.[0]?.toUpperCase() ?? '👤'}
