@@ -4,6 +4,15 @@ import { useAuth } from '../../contexts/AuthContext.jsx'
 import { formatDate, getBabyAge } from '../../lib/dates.js'
 import appConfig from '../../config/app.config.js'
 
+async function fetchBabyId(supabase, userId) {
+  const { data: baby } = await supabase
+    .from('babies').select('id').eq('owner_id', userId).maybeSingle()
+  if (baby?.id) return baby.id
+  const { data: profile } = await supabase
+    .from('user_profiles').select('baby_id').eq('id', userId).maybeSingle()
+  return profile?.baby_id ?? null
+}
+
 // ── WHO reference data (boys) — [month, P10, P50, P90] ───────────
 // Source: WHO Child Growth Standards, simplified for visual reference band
 const WHO = {
@@ -537,9 +546,12 @@ export default function GrowthScreen() {
   const handleSave = async ({ date, value }) => {
     if (!session) return
     setSaveErr(null)
-    const tab   = TABS.find(t => t.key === activeTab)
+    const babyId = await fetchBabyId(supabase, session.user.id)
+    if (!babyId) { setSaveErr(t('errors.generic')); return }
+    const tab = TABS.find(t => t.key === activeTab)
     const { error } = await supabase.from('growth_records').insert({
-      logged_by:   session.user.id,
+      baby_id:     babyId,
+      recorded_by: session.user.id,
       recorded_at: date,
       [tab.field]: value,
     })

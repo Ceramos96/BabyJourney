@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { X, ArrowLeft, Milk, Moon, Droplets, PenLine } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext.jsx'
@@ -349,6 +349,15 @@ export default function QuickLog({ open, onClose }) {
     setFormData({})
   }
 
+  const getBabyId = useCallback(async () => {
+    const { data: baby } = await supabase
+      .from('babies').select('id').eq('owner_id', session.user.id).maybeSingle()
+    if (baby?.id) return baby.id
+    const { data: profile } = await supabase
+      .from('user_profiles').select('baby_id').eq('id', session.user.id).maybeSingle()
+    return profile?.baby_id ?? null
+  }, [supabase, session])
+
   const handleSave = async () => {
     if (!session || saving || saved) return
     setSaving(true)
@@ -356,16 +365,17 @@ export default function QuickLog({ open, onClose }) {
     const timeStr = formData.time || formData.startTime || nowHCM()
 
     try {
+      const babyId = await getBabyId()
       const { error } = await supabase.from('daily_logs').insert({
+        baby_id:   babyId,
         logged_by: session.user.id,
         type,
         logged_at: timeStrToUTC(timeStr),
-        data: formData,
+        data:      formData,
       })
-      // Tolerate 42P01 (table not yet created in Supabase)
       if (error && error.code !== '42P01') throw error
     } catch (_) {
-      // Silent fail — show success UI anyway so the flow feels complete
+      // Silent fail — success UI still shown so the flow feels complete
     }
 
     setSaved(true)

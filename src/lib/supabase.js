@@ -1,10 +1,18 @@
 import { createClient } from '@supabase/supabase-js'
 
-const rawUrl = import.meta.env.VITE_SUPABASE_URL ?? ''
-const rawKey = import.meta.env.VITE_SUPABASE_ANON_KEY ?? ''
+// Normalize URL: trim whitespace, strip path components (e.g. /rest/v1), strip trailing slashes.
+// All three cause "Invalid path specified in request URL" inside @supabase/auth-js.
+const _rawUrl = (import.meta.env.VITE_SUPABASE_URL ?? '').trim()
+const rawUrl = (() => {
+  try {
+    const u = new URL(_rawUrl)
+    return `${u.protocol}//${u.host}`
+  } catch {
+    return _rawUrl.replace(/\/+$/, '')
+  }
+})()
+const rawKey = (import.meta.env.VITE_SUPABASE_ANON_KEY ?? '').trim()
 
-// URL must start with https:// — missing this is the most common Vercel mis-config.
-// We never throw at module level; instead export a flag so the app can show a setup screen.
 const urlOk  = rawUrl.startsWith('https://')
 const keyOk  = rawKey.length > 20
 

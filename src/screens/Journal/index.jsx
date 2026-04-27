@@ -62,14 +62,13 @@ function PhotosTab({ supabase, session }) {
     currentMonth.getFullYear() === now.getFullYear()
 
   const getBabyId = useCallback(async () => {
-    try {
-      const { data } = await supabase
-        .from('babies')
-        .select('id')
-        .eq('owner_id', session.user.id)
-        .single()
-      return data?.id ?? null
-    } catch { return null }
+    // Try as owner first, fall back to user_profiles for family members
+    const { data: baby } = await supabase
+      .from('babies').select('id').eq('owner_id', session.user.id).maybeSingle()
+    if (baby?.id) return baby.id
+    const { data: profile } = await supabase
+      .from('user_profiles').select('baby_id').eq('id', session.user.id).maybeSingle()
+    return profile?.baby_id ?? null
   }, [supabase, session])
 
   const load = useCallback(async () => {
@@ -98,7 +97,7 @@ function PhotosTab({ supabase, session }) {
       return fileId ? `https://drive.google.com/thumbnail?id=${fileId}&sz=w800` : null
     }
     if (photo.storage_path) {
-      const { data } = supabase.storage.from('baby-photos').getPublicUrl(photo.storage_path)
+      const { data } = supabase.storage.from('baby-media').getPublicUrl(photo.storage_path)
       return data?.publicUrl ?? null
     }
     return null
@@ -114,22 +113,28 @@ function PhotosTab({ supabase, session }) {
       const compressed = await compressImage(file)
       setCompressedSize(compressed.compressedSize)
       const babyId = await getBabyId()
-      if (!babyId) return
+      if (!babyId) {
+        setCompressedSize(null)
+        return
+      }
       const year = currentMonth.getFullYear()
       const month = String(currentMonth.getMonth() + 1).padStart(2, '0')
       const path = `babies/${babyId}/timeline/${year}/${month}/${Date.now()}-${compressed.name}`
       const { error: storageErr } = await supabase.storage
-        .from('baby-photos')
+        .from('baby-media')
         .upload(path, compressed, { contentType: 'image/jpeg' })
-      if (storageErr) return
-      await supabase.from('photos').insert({
+      if (storageErr) throw storageErr
+      const { error: dbErr } = await supabase.from('photos').insert({
         baby_id: babyId,
         uploaded_by: session.user.id,
         storage_path: path,
         taken_at: new Date().toISOString(),
       })
+      if (dbErr) throw dbErr
       await load()
-    } catch { /* tolerated */ } finally {
+    } catch (err) {
+      console.error('[Journal] upload failed:', err?.message ?? err)
+    } finally {
       setUploading(false)
     }
   }
@@ -171,7 +176,7 @@ function PhotosTab({ supabase, session }) {
     if (!lightbox) return
     try {
       if (lightbox.storage_path) {
-        await supabase.storage.from('baby-photos').remove([lightbox.storage_path])
+        await supabase.storage.from('baby-media').remove([lightbox.storage_path])
       }
       await supabase.from('photos').delete().eq('id', lightbox.id)
       setPhotos(prev => prev.filter(p => p.id !== lightbox.id))
@@ -467,14 +472,12 @@ function MilestonesTab({ supabase, session }) {
   }, [logOpen])
 
   const getBabyId = useCallback(async () => {
-    try {
-      const { data } = await supabase
-        .from('babies')
-        .select('id')
-        .eq('owner_id', session.user.id)
-        .single()
-      return data?.id ?? null
-    } catch { return null }
+    const { data: baby } = await supabase
+      .from('babies').select('id').eq('owner_id', session.user.id).maybeSingle()
+    if (baby?.id) return baby.id
+    const { data: profile } = await supabase
+      .from('user_profiles').select('baby_id').eq('id', session.user.id).maybeSingle()
+    return profile?.baby_id ?? null
   }, [supabase, session])
 
   const load = useCallback(async () => {
